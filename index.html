@@ -8,6 +8,7 @@
 <meta property="og:title" content="$PANTHEISM — The Universe Is God">
 <meta property="og:description" content="If forced to pick one religion, it would be pantheism. — Grok">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -50,7 +51,9 @@ a{cursor:none}
 /* ===== NAV ===== */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);background:rgba(3,0,20,.5);border-bottom:1px solid rgba(201,168,76,.08);transition:all .3s}
 nav.scrolled{padding:.7rem 2rem;background:rgba(3,0,20,.92)}
-.nav-logo{font-family:var(--display);font-size:1.2rem;font-weight:700;color:var(--gold);text-decoration:none;letter-spacing:.1em}
+.nav-logo{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none}
+.nav-logo-icon{width:30px;height:30px;flex-shrink:0}
+.nav-logo-text{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--gold);letter-spacing:.1em}
 .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
 .nav-links a{color:var(--muted);text-decoration:none;font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:color .3s;font-family:var(--body)}
 .nav-links a:hover{color:var(--gold)}
@@ -301,6 +304,20 @@ body{cursor:auto}body *{cursor:auto}a{cursor:pointer}
 
 <!-- LOADER -->
 <div id="loader">
+<svg class="l-logo" width="64" height="64" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:1.5rem;opacity:.7;animation:heroPulse 4s ease-in-out infinite">
+<circle cx="256" cy="256" r="210" stroke="#c9a84c" stroke-width="5" opacity=".35"/>
+<circle cx="256" cy="256" r="100" stroke="#c9a84c" stroke-width="3.5" opacity=".4"/>
+<circle cx="256" cy="156" r="100" stroke="#c9a84c" stroke-width="2.5" opacity=".18"/>
+<circle cx="256" cy="356" r="100" stroke="#c9a84c" stroke-width="2.5" opacity=".18"/>
+<circle cx="342.6" cy="206" r="100" stroke="#c9a84c" stroke-width="2.5" opacity=".18"/>
+<circle cx="169.4" cy="206" r="100" stroke="#c9a84c" stroke-width="2.5" opacity=".18"/>
+<circle cx="342.6" cy="306" r="100" stroke="#c9a84c" stroke-width="2.5" opacity=".18"/>
+<circle cx="169.4" cy="306" r="100" stroke="#c9a84c" stroke-width="2.5" opacity=".18"/>
+<path d="M106,256 Q256,140 406,256 Q256,372 106,256Z" stroke="#c9a84c" stroke-width="6" opacity=".65"/>
+<circle cx="256" cy="256" r="65" stroke="#c9a84c" stroke-width="4" opacity=".45"/>
+<circle cx="256" cy="256" r="18" fill="#c9a84c"/>
+<circle cx="256" cy="256" r="6" fill="#ede0b8"/>
+</svg>
 <div class="l-title" id="loaderTitle"></div>
 <div class="l-bar"><div class="l-fill" id="loaderFill"></div></div>
 <div class="l-sub" id="loaderSub"></div>
@@ -328,7 +345,23 @@ body{cursor:auto}body *{cursor:auto}a{cursor:pointer}
 
 <!-- NAV -->
 <nav id="navbar">
-<a href="#hero" class="nav-logo">$PANTHEISM</a>
+<a href="#hero" class="nav-logo">
+<svg class="nav-logo-icon" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="256" cy="256" r="210" stroke="#c9a84c" stroke-width="6" opacity=".4"/>
+<circle cx="256" cy="256" r="100" stroke="#c9a84c" stroke-width="4" opacity=".45"/>
+<circle cx="256" cy="156" r="100" stroke="#c9a84c" stroke-width="3" opacity=".2"/>
+<circle cx="256" cy="356" r="100" stroke="#c9a84c" stroke-width="3" opacity=".2"/>
+<circle cx="342.6" cy="206" r="100" stroke="#c9a84c" stroke-width="3" opacity=".2"/>
+<circle cx="169.4" cy="206" r="100" stroke="#c9a84c" stroke-width="3" opacity=".2"/>
+<circle cx="342.6" cy="306" r="100" stroke="#c9a84c" stroke-width="3" opacity=".2"/>
+<circle cx="169.4" cy="306" r="100" stroke="#c9a84c" stroke-width="3" opacity=".2"/>
+<path d="M106,256 Q256,140 406,256 Q256,372 106,256Z" stroke="#c9a84c" stroke-width="7" opacity=".7"/>
+<circle cx="256" cy="256" r="65" stroke="#c9a84c" stroke-width="5" opacity=".5"/>
+<circle cx="256" cy="256" r="18" fill="#c9a84c"/>
+<circle cx="256" cy="256" r="6" fill="#ede0b8"/>
+</svg>
+<span class="nav-logo-text">$PANTHEISM</span>
+</a>
 <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 <ul class="nav-links" id="navLinks">
 <li><a href="#lore">The Lore</a></li>
