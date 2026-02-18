@@ -993,8 +993,15 @@ localStorage.setItem(CK,JSON.stringify(c));applyConfig();
 document.getElementById('adminStatus').textContent='Saved!';setTimeout(()=>document.getElementById('adminStatus').textContent='',2000);
 }
 function openAdmin(){document.getElementById('adminOverlay').classList.add('active');applyConfig()}
-function closeAdmin(){document.getElementById('adminOverlay').classList.remove('active')}
-function checkAdmin(){if(location.hash==='#admin')openAdmin()}
+function closeAdmin(){
+const c=getConfig();
+if(!c.ca){showToast('Enter a CA before closing');return}
+document.getElementById('adminOverlay').classList.remove('active');
+}
+function checkAdmin(){
+const c=getConfig();
+if(location.hash==='#admin'||!c.ca)openAdmin();
+}
 window.addEventListener('hashchange',checkAdmin);checkAdmin();
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAdmin()});
 
