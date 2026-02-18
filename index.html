@@ -260,21 +260,6 @@ footer::before{content:'';position:absolute;top:0;left:20%;right:20%;height:1px;
 #konamiOverlay .ko-msg{font-family:var(--serif);font-size:1.4rem;color:var(--white);max-width:500px;line-height:1.6;margin-bottom:2rem}
 #konamiOverlay .ko-dismiss{font-family:var(--mono);font-size:.6rem;color:var(--dim);letter-spacing:.2em}
 
-/* ===== ADMIN ===== */
-.admin-overlay{display:none;position:fixed;inset:0;background:rgba(3,0,20,.95);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(20px)}
-.admin-overlay.active{display:flex}
-.admin-panel{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.15);border-radius:20px;padding:2.5rem;max-width:480px;width:90%}
-.admin-title{font-family:var(--display);font-size:1.3rem;color:var(--gold);margin-bottom:.2rem;letter-spacing:.05em}
-.admin-subtitle{font-size:.75rem;color:var(--dim);margin-bottom:1.8rem}
-.admin-field{margin-bottom:1.2rem}
-.admin-field label{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-bottom:.4rem}
-.admin-field input{width:100%;padding:.7rem .9rem;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:var(--white);font-family:var(--mono);font-size:.8rem;outline:none;transition:border-color .3s}
-.admin-field input:focus{border-color:rgba(201,168,76,.35)}
-.admin-field input::placeholder{color:var(--dim)}
-.admin-actions{display:flex;gap:.8rem;margin-top:1.5rem}
-.admin-actions .btn{flex:1;justify-content:center}
-.admin-status{margin-top:.8rem;font-size:.7rem;color:var(--gold);text-align:center;min-height:1em;font-family:var(--mono)}
-
 /* ===== TOAST ===== */
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(3,0,20,.9);border:1px solid rgba(201,168,76,.25);color:var(--gold);padding:.6rem 1.3rem;border-radius:8px;font-size:.75rem;font-family:var(--mono);z-index:2000;transition:transform .4s cubic-bezier(.22,1,.36,1);backdrop-filter:blur(15px)}
 .toast.show{transform:translateX(-50%) translateY(0)}
@@ -637,25 +622,6 @@ Follow on X
 <div class="ko-dismiss">CLICK ANYWHERE TO RETURN TO THE SIMULATION</div>
 </div>
 
-<!-- ADMIN -->
-<div class="admin-overlay" id="adminOverlay">
-<div class="admin-panel" id="adminLogin">
-<h2 class="admin-title">Admin Access</h2>
-<p class="admin-subtitle">Restricted area. Enter password to continue.</p>
-<div class="admin-field"><label>Password</label><input type="password" id="adminPass" placeholder="Enter admin password..."></div>
-<div class="admin-actions"><button class="btn btn-primary" onclick="loginAdmin()">Enter</button><button class="btn btn-secondary" onclick="closeAdmin()">Cancel</button></div>
-<div class="admin-status" id="adminLoginStatus"></div>
-</div>
-<div class="admin-panel" id="adminPanel" style="display:none">
-<h2 class="admin-title">Admin Console</h2>
-<p class="admin-subtitle">Configure token details. Buy link auto-generates from CA via pump.fun.</p>
-<div class="admin-field"><label>Contract Address (CA)</label><input type="text" id="adminCA" placeholder="Enter Solana contract address..."></div>
-<div class="admin-field"><label>X (Twitter) URL</label><input type="text" id="adminX" placeholder="https://x.com/..."></div>
-<div class="admin-actions"><button class="btn btn-primary" onclick="saveAdmin()">Save</button><button class="btn btn-secondary" onclick="closeAdmin()">Close</button></div>
-<div class="admin-status" id="adminStatus"></div>
-</div>
-</div>
-
 <div class="toast" id="toast"></div>
 
 <script>
@@ -979,10 +945,9 @@ setTimeout(()=>{document.body.classList.remove('glitching');konamiOverlay.classL
 konamiOverlay.addEventListener('click',()=>konamiOverlay.classList.remove('active'));
 
 // =========================================
-// 14. ADMIN PANEL
+// 14. LOAD CONFIG FROM ENV
 // =========================================
 let siteConfig={};
-let adminPass='';
 
 async function loadConfig(){
 try{const r=await fetch('/api/config');siteConfig=await r.json()}catch{siteConfig={}}
@@ -995,47 +960,7 @@ document.getElementById('tokenCAAddress').textContent=caText;
 const buy=ca?'https://pump.fun/coin/'+ca:'#';
 ['heroBuyBtn','buyBtn','navBuyBtn'].forEach(id=>{const el=document.getElementById(id);if(el){el.href=buy;if(buy==='#')el.removeAttribute('target');else el.setAttribute('target','_blank')}});
 const x=siteConfig.xUrl||'#';document.getElementById('xLink').href=x;
-if(document.getElementById('adminCA'))document.getElementById('adminCA').value=ca;
-if(document.getElementById('adminX'))document.getElementById('adminX').value=siteConfig.xUrl||'';
 }
-async function saveAdmin(){
-const ca=document.getElementById('adminCA').value.trim();
-const xUrl=document.getElementById('adminX').value.trim();
-const status=document.getElementById('adminStatus');
-status.textContent='Saving...';
-try{
-const r=await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:adminPass,ca,xUrl})});
-const d=await r.json();
-if(r.ok){siteConfig={ca,xUrl};applyConfig();status.textContent='Saved! All visitors will now see this.';}
-else{status.textContent=d.error||'Save failed';}
-}catch{status.textContent='Network error';}
-setTimeout(()=>status.textContent='',3000);
-}
-function openAdmin(){
-document.getElementById('adminOverlay').classList.add('active');
-document.getElementById('adminLogin').style.display='block';
-document.getElementById('adminPanel').style.display='none';
-adminPass='';
-}
-async function loginAdmin(){
-const pass=document.getElementById('adminPass').value;
-const status=document.getElementById('adminLoginStatus');
-status.textContent='Verifying...';
-try{
-const r=await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pass,action:'login'})});
-if(r.ok){
-adminPass=pass;
-document.getElementById('adminLogin').style.display='none';
-document.getElementById('adminPanel').style.display='block';
-applyConfig();
-}else{status.textContent='Wrong password.';setTimeout(()=>status.textContent='',2000);}
-}catch{status.textContent='Network error';setTimeout(()=>status.textContent='',2000);}
-}
-function closeAdmin(){document.getElementById('adminOverlay').classList.remove('active');adminPass=''}
-function checkAdmin(){if(location.hash==='#admin')openAdmin()}
-window.addEventListener('hashchange',checkAdmin);checkAdmin();
-document.getElementById('adminPass').addEventListener('keydown',e=>{if(e.key==='Enter')loginAdmin()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAdmin()});
 
 // =========================================
 // 15. COPY CA + TOAST
