@@ -981,46 +981,57 @@ konamiOverlay.addEventListener('click',()=>konamiOverlay.classList.remove('activ
 // =========================================
 // 14. ADMIN PANEL
 // =========================================
-const CK='pantheism_config';
-const ADMIN_HASH='8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';// sha256 of 'admin' — change this
-let adminAuthed=false;
-async function hashPass(p){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(p));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')}
-function getConfig(){try{return JSON.parse(localStorage.getItem(CK))||{}}catch{return{}}}
+let siteConfig={};
+let adminPass='';
+
+async function loadConfig(){
+try{const r=await fetch('/api/config');siteConfig=await r.json()}catch{siteConfig={}}
+applyConfig();
+}
 function applyConfig(){
-const c=getConfig();const ca=c.ca||'';const caText=ca||'Coming soon...';
+const ca=siteConfig.ca||'';const caText=ca||'Coming soon...';
 document.getElementById('heroCAAddress').textContent=caText;
 document.getElementById('tokenCAAddress').textContent=caText;
 const buy=ca?'https://pump.fun/coin/'+ca:'#';
 ['heroBuyBtn','buyBtn','navBuyBtn'].forEach(id=>{const el=document.getElementById(id);if(el){el.href=buy;if(buy==='#')el.removeAttribute('target');else el.setAttribute('target','_blank')}});
-const x=c.xUrl||'#';document.getElementById('xLink').href=x;
+const x=siteConfig.xUrl||'#';document.getElementById('xLink').href=x;
 if(document.getElementById('adminCA'))document.getElementById('adminCA').value=ca;
-if(document.getElementById('adminX'))document.getElementById('adminX').value=c.xUrl||'';
+if(document.getElementById('adminX'))document.getElementById('adminX').value=siteConfig.xUrl||'';
 }
-function saveAdmin(){
-const c={ca:document.getElementById('adminCA').value.trim(),xUrl:document.getElementById('adminX').value.trim()};
-localStorage.setItem(CK,JSON.stringify(c));applyConfig();
-document.getElementById('adminStatus').textContent='Saved!';setTimeout(()=>document.getElementById('adminStatus').textContent='',2000);
+async function saveAdmin(){
+const ca=document.getElementById('adminCA').value.trim();
+const xUrl=document.getElementById('adminX').value.trim();
+const status=document.getElementById('adminStatus');
+status.textContent='Saving...';
+try{
+const r=await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:adminPass,ca,xUrl})});
+const d=await r.json();
+if(r.ok){siteConfig={ca,xUrl};applyConfig();status.textContent='Saved! All visitors will now see this.';}
+else{status.textContent=d.error||'Save failed';}
+}catch{status.textContent='Network error';}
+setTimeout(()=>status.textContent='',3000);
 }
 function openAdmin(){
 document.getElementById('adminOverlay').classList.add('active');
 document.getElementById('adminLogin').style.display='block';
 document.getElementById('adminPanel').style.display='none';
-adminAuthed=false;
+adminPass='';
 }
 async function loginAdmin(){
 const pass=document.getElementById('adminPass').value;
-const h=await hashPass(pass);
-if(h===ADMIN_HASH){
-adminAuthed=true;
+const status=document.getElementById('adminLoginStatus');
+status.textContent='Verifying...';
+try{
+const r=await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pass,ca:siteConfig.ca||'',xUrl:siteConfig.xUrl||''})});
+if(r.ok){
+adminPass=pass;
 document.getElementById('adminLogin').style.display='none';
 document.getElementById('adminPanel').style.display='block';
 applyConfig();
-}else{
-document.getElementById('adminLoginStatus').textContent='Wrong password.';
-setTimeout(()=>document.getElementById('adminLoginStatus').textContent='',2000);
+}else{status.textContent='Wrong password.';setTimeout(()=>status.textContent='',2000);}
+}catch{status.textContent='Network error';setTimeout(()=>status.textContent='',2000);}
 }
-}
-function closeAdmin(){document.getElementById('adminOverlay').classList.remove('active');adminAuthed=false}
+function closeAdmin(){document.getElementById('adminOverlay').classList.remove('active');adminPass=''}
 function checkAdmin(){if(location.hash==='#admin')openAdmin()}
 window.addEventListener('hashchange',checkAdmin);checkAdmin();
 document.getElementById('adminPass').addEventListener('keydown',e=>{if(e.key==='Enter')loginAdmin()});
@@ -1030,7 +1041,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAdmin()});
 // 15. COPY CA + TOAST
 // =========================================
 function copyCA(){
-const ca=getConfig().ca;
+const ca=siteConfig.ca;
 if(!ca){showToast('CA not set yet');return}
 navigator.clipboard.writeText(ca).then(()=>showToast('CA copied!')).catch(()=>showToast('Copy failed'));
 }
@@ -1039,7 +1050,7 @@ function showToast(m){const t=document.getElementById('toast');t.textContent=m;t
 // =========================================
 // INIT
 // =========================================
-applyConfig();
+loadConfig();
 </script>
 </body>
 </html>
