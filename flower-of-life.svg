@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0a0628"/>
+      <stop offset="100%" stop-color="#030014"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c9a84c" stop-opacity=".12"/>
+      <stop offset="60%" stop-color="#c9a84c" stop-opacity=".03"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8c84c"/>
+      <stop offset="100%" stop-color="#a07a30"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="500" fill="url(#bg)"/>
+
+  <!-- Ambient glow -->
+  <circle cx="250" cy="250" r="230" fill="url(#glow)"/>
+
+  <!-- Outer boundary circle -->
+  <circle cx="250" cy="250" r="200" fill="none" stroke="#c9a84c" stroke-width="1.5" opacity=".3"/>
+  <circle cx="250" cy="250" r="202" fill="none" stroke="#c9a84c" stroke-width=".5" opacity=".15"/>
+
+  <!-- Ring 1: Center circle -->
+  <circle cx="250" cy="250" r="66.7" fill="none" stroke="#c9a84c" stroke-width="1.2" opacity=".6"/>
+
+  <!-- Ring 2: 6 circles around center (first petal ring) -->
+  <circle cx="250" cy="183.3" r="66.7" fill="none" stroke="#c9a84c" stroke-width="1.1" opacity=".5"/>
+  <circle cx="307.8" cy="216.65" r="66.7" fill="none" stroke="#c9a84c" stroke-width="1.1" opacity=".5"/>
+  <circle cx="307.8" cy="283.35" r="66.7" fill="none" stroke="#c9a84c" stroke-width="1.1" opacity=".5"/>
+  <circle cx="250" cy="316.7" r="66.7" fill="none" stroke="#c9a84c" stroke-width="1.1" opacity=".5"/>
+  <circle cx="192.2" cy="283.35" r="66.7" fill="none" stroke="#c9a84c" stroke-width="1.1" opacity=".5"/>
+  <circle cx="192.2" cy="216.65" r="66.7" fill="none" stroke="#c9a84c" stroke-width="1.1" opacity=".5"/>
+
+  <!-- Ring 3: 12 circles (second petal ring) -->
+  <circle cx="250" cy="116.6" r="66.7" fill="none" stroke="#c9a84c" stroke-width=".9" opacity=".3"/>
+  <circle cx="307.8" cy="149.95" r="66.7" fill="none" stroke="#c9a84c" stroke-width=".9" opacity=".3"/>
+  <circle cx="365.6" cy="216.65" r="66.7" fill="none" stroke="#c9a84c" stroke-width=".9" opacity=".3"/>
+  <circle cx="365.6" cy="250" r="66.7" fill="none" stroke="#c9a84c" stroke-width=".9" opacity=".3"/>
+  <circle cx="365.6" cy="283.35" r="66.7" fill="none" stroke="#c9a84c" stroke-width=".9" opacity=".3"/>
+  <circle cx="307.8" cy="350.05" r="66.7" fill="none" stroke="#c9a84c" stroke-width=".9" opacity=".3"/>
+  <circle cx="250" cy="383.4" r="66.7" fill="none" stroke="#c9a84c" stroke-width=".9" opacity=".3"/>
+  <circle cx="192.2" cy="350.05" r="66.7" fill="none" stroke="#c9a84c" stroke-width=".9" opacity=".3"/>
+  <circle cx="134.4" cy="283.35" r="66.7" fill="none" stroke="#c9a84c" stroke-width=".9" opacity=".3"/>
+  <circle cx="134.4" cy="250" r="66.7" fill="none" stroke="#c9a84c" stroke-width=".9" opacity=".3"/>
+  <circle cx="134.4" cy="216.65" r="66.7" fill="none" stroke="#c9a84c" stroke-width=".9" opacity=".3"/>
+  <circle cx="192.2" cy="149.95" r="66.7" fill="none" stroke="#c9a84c" stroke-width=".9" opacity=".3"/>
+
+  <!-- Center seed of life accent -->
+  <circle cx="250" cy="250" r="4" fill="#c9a84c" opacity=".8"/>
+  <circle cx="250" cy="250" r="10" fill="none" stroke="#c9a84c" stroke-width=".8" opacity=".4"/>
+  <circle cx="250" cy="250" r="1.5" fill="#ede0b8"/>
+</svg>
