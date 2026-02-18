@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$PANTHEISM — The Universe Is God</title>
+<meta name="description" content="The universe doesn't need you to believe in it. It simply is. $PANTHEISM on Solana.">
+<meta property="og:title" content="$PANTHEISM — The Universe Is God">
+<meta property="og:description" content="If forced to pick one religion, it would be pantheism. — Grok">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--void:#030014;--deep:#0a0628;--indigo:#150e38;--nebula:#1f1250;--purple:#2d1654;
+--gold:#c9a84c;--gold-b:#e8c84c;--gold-pale:#ede0b8;--gold-glow:rgba(201,168,76,.3);
+--blue:#4a6fff;--cyan:#44ddff;--white:#e8e4f0;--muted:#8b84a8;--dim:#4a4466;
+--display:'Cinzel',serif;--serif:'Cormorant Garamond',serif;--mono:'Space Mono',monospace;--body:'Sora',sans-serif;
+}
+html{scroll-behavior:smooth;background:var(--void)}
+body{font-family:var(--body);color:var(--white);background:var(--void);overflow-x:hidden;line-height:1.6;cursor:none}
+body *{cursor:none}
+a{cursor:none}
+::selection{background:rgba(201,168,76,.3);color:var(--gold-pale)}
+
+/* ===== LOADER ===== */
+#loader{position:fixed;inset:0;z-index:10000;background:var(--void);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s,visibility .8s}
+#loader.done{opacity:0;visibility:hidden;pointer-events:none}
+#loader .l-title{font-family:var(--mono);font-size:.8rem;letter-spacing:.4em;color:var(--gold);margin-bottom:2rem;min-height:1.2em}
+#loader .l-bar{width:200px;height:2px;background:rgba(255,255,255,.05);border-radius:1px;overflow:hidden}
+#loader .l-fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-b));border-radius:1px;transition:width .1s linear}
+#loader .l-sub{font-family:var(--mono);font-size:.6rem;color:var(--dim);margin-top:1rem;letter-spacing:.15em;min-height:1em}
+
+/* ===== CUSTOM CURSOR ===== */
+#cursor{position:fixed;width:32px;height:32px;border:1.5px solid rgba(201,168,76,.5);border-radius:50%;pointer-events:none;z-index:9999;transition:transform .15s,border-color .3s,width .2s,height .2s;transform:translate(-50%,-50%);mix-blend-mode:difference}
+#cursor.hover{width:50px;height:50px;border-color:var(--gold)}
+#cursor-dot{position:fixed;width:5px;height:5px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--gold-glow)}
+
+/* ===== CANVAS ===== */
+#cosmos{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ===== SACRED GEOMETRY ===== */
+.sacred-geo{position:fixed;pointer-events:none;z-index:0;opacity:.04}
+.geo-flower{top:10%;right:-5%;width:500px;height:500px;animation:geoSpin 120s linear infinite}
+.geo-hex{bottom:5%;left:-3%;width:350px;height:350px;animation:geoSpin 90s linear infinite reverse}
+@keyframes geoSpin{to{transform:rotate(360deg)}}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);background:rgba(3,0,20,.5);border-bottom:1px solid rgba(201,168,76,.08);transition:all .3s}
+nav.scrolled{padding:.7rem 2rem;background:rgba(3,0,20,.92)}
+.nav-logo{font-family:var(--display);font-size:1.2rem;font-weight:700;color:var(--gold);text-decoration:none;letter-spacing:.1em}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:color .3s;font-family:var(--body)}
+.nav-links a:hover{color:var(--gold)}
+.nav-buy{background:linear-gradient(135deg,var(--gold),#a07a30)!important;color:var(--void)!important;padding:.45rem 1.1rem!important;border-radius:6px;font-weight:600!important;transition:transform .2s,box-shadow .3s!important}
+.nav-buy:hover{transform:translateY(-2px);box-shadow:0 4px 25px rgba(201,168,76,.3)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:none;background:none;border:none;padding:4px}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--gold);transition:all .3s}
+
+/* ===== SECTIONS ===== */
+section{position:relative;z-index:1}
+.container{max-width:1100px;margin:0 auto;padding:0 2rem}
+.section-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);opacity:.6;margin-bottom:1rem}
+.section-title{font-family:var(--display);font-size:clamp(1.8rem,5vw,3.2rem);font-weight:700;line-height:1.15;margin-bottom:1.5rem;letter-spacing:.04em}
+
+/* ===== REVEALS ===== */
+.reveal{opacity:0;transform:translateY(50px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.15s}.reveal-delay-2{transition-delay:.3s}.reveal-delay-3{transition-delay:.45s}
+
+/* ===== GLITCH ===== */
+.glitching{animation:sectionGlitch .4s ease}
+@keyframes sectionGlitch{
+0%{transform:translate(0);filter:none}
+10%{transform:translate(-3px,2px);filter:hue-rotate(40deg)}
+20%{transform:translate(2px,-1px) skewX(1deg);filter:saturate(2)}
+30%{transform:translate(0);filter:none}
+50%{transform:translate(1px,1px);filter:hue-rotate(-20deg) brightness(1.3)}
+60%{transform:translate(-1px,0);filter:none}
+100%{transform:translate(0);filter:none}
+}
+
+/* ===== CLICK RIPPLE ===== */
+.click-ripple{position:fixed;border-radius:50%;border:1px solid var(--gold);pointer-events:none;z-index:9998;animation:rippleExpand .7s ease-out forwards}
+@keyframes rippleExpand{
+0%{width:0;height:0;opacity:.6}
+100%{width:150px;height:150px;opacity:0}
+}
+
+/* ===== HERO ===== */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
+.hero-bg-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,rgba(45,22,84,.04) 40%,transparent 70%);animation:heroPulse 8s ease-in-out infinite;pointer-events:none}
+@keyframes heroPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1}50%{transform:translate(-50%,-50%) scale(1.2);opacity:.6}}
+.hero-parallax{position:relative;z-index:2;will-change:transform}
+.hero-eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;opacity:0;animation:fadeUp 1s ease .5s forwards}
+.hero-title{font-family:var(--display);font-size:clamp(2.5rem,9vw,6rem);font-weight:900;line-height:1;margin-bottom:1.5rem;letter-spacing:.03em;opacity:0;animation:fadeUp 1s ease .7s forwards}
+.hero-title .gold{color:var(--gold);text-shadow:0 0 80px rgba(201,168,76,.5),0 0 160px rgba(201,168,76,.15);position:relative;display:inline-block}
+.hero-title .gold:hover{animation:textGlitch .3s ease}
+@keyframes textGlitch{
+0%,100%{transform:none;text-shadow:0 0 80px rgba(201,168,76,.5)}
+25%{transform:translate(-3px,1px) skewX(2deg);text-shadow:-3px 0 var(--cyan),3px 0 var(--gold)}
+50%{transform:translate(2px,-1px);text-shadow:2px 0 var(--blue),-2px 0 var(--gold)}
+75%{transform:translate(-1px,2px) skewX(-1deg);text-shadow:0 0 80px rgba(201,168,76,.8)}
+}
+.hero-subtitle{font-family:var(--serif);font-size:clamp(1rem,2.5vw,1.4rem);font-weight:400;font-style:italic;color:var(--muted);margin-bottom:.5rem;opacity:0;animation:fadeUp 1s ease .9s forwards;line-height:1.6;max-width:650px;margin-left:auto;margin-right:auto}
+.hero-attr{font-family:var(--mono);font-size:.65rem;color:var(--dim);margin-bottom:3rem;opacity:0;animation:fadeUp 1s ease 1.1s forwards;letter-spacing:.1em}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp 1s ease 1.3s forwards}
+.hero-ca{margin-top:2rem;opacity:0;animation:fadeUp 1s ease 1.5s forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== BUTTONS ===== */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;border-radius:8px;font-family:var(--body);font-size:.85rem;font-weight:600;text-decoration:none;border:none;transition:all .3s;position:relative;overflow:hidden}
+.btn-primary{background:linear-gradient(135deg,var(--gold),#a07a30);color:var(--void);box-shadow:0 4px 30px rgba(201,168,76,.2)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 40px rgba(201,168,76,.4)}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.2) 50%,transparent 70%);transform:translateX(-100%);transition:transform .5s}
+.btn-primary:hover::after{transform:translateX(100%)}
+.btn-secondary{background:rgba(201,168,76,.08);color:var(--gold);border:1px solid rgba(201,168,76,.25)}
+.btn-secondary:hover{background:rgba(201,168,76,.15);transform:translateY(-3px)}
+
+/* ===== CA DISPLAY ===== */
+.ca-display{display:inline-flex;align-items:center;gap:.7rem;padding:.55rem 1.2rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;cursor:none;transition:all .3s}
+.ca-display:hover{background:rgba(201,168,76,.06);border-color:rgba(201,168,76,.25)}
+.ca-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+.ca-address{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.ca-copy{color:var(--gold);font-size:.7rem;opacity:.5;transition:opacity .2s}
+.ca-display:hover .ca-copy{opacity:1}
+
+/* ===== DIVIDER ===== */
+.divider{height:160px;position:relative;display:flex;align-items:center;justify-content:center}
+.divider::before{content:'';position:absolute;width:250px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent)}
+.divider-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;box-shadow:0 0 15px var(--gold-glow);position:relative;z-index:1}
+
+/* ===== LORE ===== */
+#lore{padding:5rem 0;position:relative}
+#lore::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(31,18,80,.12) 30%,rgba(45,22,84,.08) 70%,transparent);pointer-events:none}
+.lore-intro{text-align:center;margin-bottom:4rem}
+.lore-intro p{font-size:1rem;color:var(--muted);max-width:620px;margin:0 auto;line-height:1.75;font-family:var(--serif);font-size:1.1rem}
+.conversation{max-width:720px;margin:0 auto}
+.convo-chapter{margin-bottom:4rem}
+.convo-chapter-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);opacity:.4;margin-bottom:2rem;text-align:center}
+.convo-msg{margin-bottom:1.8rem;padding:1.6rem 1.8rem;border-radius:14px;position:relative;overflow:hidden}
+.convo-msg::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s;background:linear-gradient(135deg,rgba(201,168,76,.03),transparent);pointer-events:none}
+.convo-msg:hover::before{opacity:1}
+.convo-msg.elon{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);margin-right:2.5rem}
+.convo-msg.grok{background:linear-gradient(135deg,rgba(201,168,76,.03),rgba(74,45,110,.04));border:1px solid rgba(201,168,76,.08);margin-left:2.5rem}
+.convo-sender{font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;margin-bottom:.7rem}
+.convo-msg.elon .convo-sender{color:var(--blue)}.convo-msg.grok .convo-sender{color:var(--gold)}
+.convo-msg p{font-size:.9rem;line-height:1.8;color:var(--muted);font-family:var(--body)}
+.convo-msg p+p{margin-top:.9rem}
+.golden-quote{font-family:var(--serif)!important;font-size:1.2rem!important;color:var(--gold-pale)!important;font-style:italic;line-height:1.65!important;padding:1rem 0 1rem 1.2rem;border-left:2px solid rgba(201,168,76,.25);margin:1.2rem 0!important;text-shadow:0 0 40px rgba(201,168,76,.12)}
+.convo-highlight{color:var(--gold)!important;font-weight:500}
+.scramble-text{display:inline}
+
+/* ===== PRAYER TERMINAL ===== */
+#terminal{padding:5rem 0;position:relative}
+.terminal-box{max-width:650px;margin:0 auto;background:rgba(0,0,0,.4);border:1px solid rgba(201,168,76,.12);border-radius:16px;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,.5),inset 0 0 80px rgba(0,0,0,.3)}
+.terminal-header{display:flex;align-items:center;gap:.6rem;padding:.7rem 1.2rem;background:rgba(201,168,76,.05);border-bottom:1px solid rgba(201,168,76,.08)}
+.terminal-dot{width:8px;height:8px;border-radius:50%;background:var(--dim)}
+.terminal-dot.r{background:#ff5f56}.terminal-dot.y{background:#ffbd2e}.terminal-dot.g{background:#27c93f}
+.terminal-title{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;color:var(--dim);margin-left:.5rem;text-transform:uppercase}
+.terminal-body{padding:1.5rem;font-family:var(--mono);font-size:.8rem;min-height:280px;max-height:350px;overflow-y:auto}
+.terminal-body::-webkit-scrollbar{width:4px}
+.terminal-body::-webkit-scrollbar-thumb{background:rgba(201,168,76,.2);border-radius:2px}
+.terminal-line{margin-bottom:.3rem;line-height:1.6}
+.terminal-line .prompt{color:var(--gold)}
+.terminal-line .sys{color:var(--dim)}
+.terminal-line .response{color:var(--cyan)}
+.terminal-line .err{color:#ff6b6b}
+.terminal-line .ok{color:#27c93f}
+.terminal-input-line{display:flex;align-items:center;gap:.4rem;margin-top:.5rem}
+.terminal-input-line .prompt{color:var(--gold);white-space:nowrap}
+#terminalInput{background:none;border:none;color:var(--white);font-family:var(--mono);font-size:.8rem;flex:1;outline:none;caret-color:var(--gold)}
+#terminalInput::placeholder{color:var(--dim)}
+.terminal-scanline{position:absolute;top:0;left:0;right:0;height:2px;background:rgba(201,168,76,.03);animation:scanline 4s linear infinite;pointer-events:none;z-index:2}
+@keyframes scanline{0%{top:0}100%{top:100%}}
+
+/* ===== PHILOSOPHY ===== */
+#philosophy{padding:5rem 0 6rem}
+.philosophy-header{text-align:center;margin-bottom:4rem}
+.philosophy-header p{color:var(--muted);font-size:1.1rem;font-family:var(--serif);max-width:580px;margin:0 auto;line-height:1.75}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem}
+.pillar{background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.005));border:1px solid rgba(255,255,255,.05);border-radius:18px;padding:2.2rem 1.8rem;position:relative;overflow:hidden;transition:border-color .4s,box-shadow .4s;transform-style:preserve-3d;will-change:transform}
+.pillar:hover{border-color:rgba(201,168,76,.2);box-shadow:0 25px 70px rgba(0,0,0,.4)}
+.pillar::after{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .4s}
+.pillar:hover::after{opacity:.5}
+.pillar-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.06),transparent);opacity:0;transition:opacity .4s;pointer-events:none}
+.pillar:hover .pillar-glow{opacity:1}
+.pillar-icon{font-size:2.2rem;margin-bottom:1rem;display:block}
+.pillar-title{font-family:var(--display);font-size:1.2rem;font-weight:700;margin-bottom:.4rem;color:var(--gold);letter-spacing:.04em}
+.pillar-subtitle{font-family:var(--mono);font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--dim);margin-bottom:1rem}
+.pillar p{font-size:.85rem;color:var(--muted);line-height:1.75}
+.pillar blockquote{margin-top:1.1rem;padding-left:1rem;border-left:2px solid rgba(201,168,76,.2);font-family:var(--serif);font-style:italic;font-size:.9rem;color:rgba(232,200,76,.6);line-height:1.6}
+.pillar blockquote cite{display:block;margin-top:.3rem;font-family:var(--body);font-style:normal;font-size:.6rem;color:var(--dim)}
+
+/* ===== CALCULATOR ===== */
+#calculator{padding:5rem 0 6rem;position:relative}
+#calculator::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(45,22,84,.12),transparent 70%);pointer-events:none}
+.calc-header{text-align:center;margin-bottom:3.5rem}
+.calc-header p{color:var(--muted);font-size:1rem;max-width:580px;margin:0 auto;line-height:1.7}
+.calculator-card{max-width:680px;margin:0 auto;background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.05);border-radius:22px;padding:2.8rem;position:relative;overflow:hidden}
+.calculator-card::before{content:'';position:absolute;top:-1px;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.3}
+.calc-result{text-align:center;margin-bottom:2.5rem}
+.calc-result-number{font-family:var(--display);font-size:clamp(3rem,8vw,5.5rem);font-weight:900;color:var(--gold);text-shadow:0 0 80px rgba(201,168,76,.35);line-height:1;transition:text-shadow .3s}
+.calc-result-number.pulse{text-shadow:0 0 120px rgba(201,168,76,.6),0 0 200px rgba(201,168,76,.2)}
+.calc-result-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--dim);margin-top:.5rem}
+.calc-gauge{width:100%;height:8px;background:rgba(255,255,255,.04);border-radius:4px;margin-top:1.5rem;overflow:hidden;position:relative}
+.calc-gauge-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--gold),#ff6644);border-radius:4px;transition:width .4s cubic-bezier(.22,1,.36,1);position:relative}
+.calc-gauge-fill::after{content:'';position:absolute;right:0;top:-2px;bottom:-2px;width:12px;background:inherit;border-radius:50%;box-shadow:0 0 15px currentColor;filter:brightness(1.3)}
+.calc-sliders{display:flex;flex-direction:column;gap:1.8rem}
+.calc-slider-group{display:flex;flex-direction:column;gap:.5rem}
+.calc-slider-header{display:flex;justify-content:space-between;align-items:baseline}
+.calc-slider-label{font-size:.8rem;font-weight:500;color:var(--white)}
+.calc-slider-value{font-family:var(--mono);font-size:.75rem;color:var(--gold)}
+.calc-slider-desc{font-size:.7rem;color:var(--dim);line-height:1.5}
+input[type=range]{-webkit-appearance:none;width:100%;height:3px;background:rgba(255,255,255,.06);border-radius:2px;outline:none;cursor:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:var(--gold);border-radius:50%;cursor:none;box-shadow:0 0 20px var(--gold-glow);transition:transform .2s,box-shadow .2s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3);box-shadow:0 0 30px var(--gold-glow)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;background:var(--gold);border-radius:50%;cursor:none;border:none;box-shadow:0 0 20px var(--gold-glow)}
+.calc-equation{margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.04);text-align:center}
+.calc-equation code{font-family:var(--mono);font-size:.75rem;color:var(--dim);background:rgba(255,255,255,.02);padding:.6rem 1.2rem;border-radius:8px;display:inline-block}
+.calc-equation .label{font-size:.55rem;color:var(--dim);margin-top:.5rem;font-family:var(--mono);letter-spacing:.12em}
+
+/* ===== TOKEN ===== */
+#token{padding:5rem 0 3rem}
+.token-header{text-align:center;margin-bottom:2.5rem}
+.token-card{max-width:580px;margin:0 auto;background:linear-gradient(180deg,rgba(201,168,76,.03),rgba(201,168,76,.008));border:1px solid rgba(201,168,76,.1);border-radius:22px;padding:2.5rem;text-align:center;position:relative;overflow:hidden}
+.token-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,rgba(201,168,76,.03),transparent,rgba(201,168,76,.03),transparent);animation:tokenSpin 20s linear infinite;pointer-events:none}
+@keyframes tokenSpin{to{transform:rotate(360deg)}}
+.token-name{font-family:var(--display);font-size:2.5rem;font-weight:900;color:var(--gold);text-shadow:0 0 50px rgba(201,168,76,.3);position:relative;z-index:1}
+.token-chain{font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;color:var(--dim);margin-bottom:1.5rem;position:relative;z-index:1}
+.token-ca-box{display:flex;align-items:center;gap:.6rem;padding:.7rem 1rem;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.05);border-radius:10px;margin-bottom:1.5rem;cursor:none;transition:all .3s;position:relative;z-index:1}
+.token-ca-box:hover{border-color:rgba(201,168,76,.25);background:rgba(0,0,0,.45)}
+.token-ca-label{font-family:var(--mono);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.token-ca-value{font-family:var(--mono);font-size:.75rem;color:var(--muted);flex:1;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.token-ca-copy{background:none;border:none;color:var(--gold);font-size:.7rem;padding:3px;opacity:.5;transition:opacity .2s}
+.token-ca-box:hover .token-ca-copy{opacity:1}
+.token-actions{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.token-social{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.3rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;color:var(--muted);text-decoration:none;font-size:.8rem;transition:all .3s}
+.token-social:hover{border-color:rgba(201,168,76,.25);color:var(--gold);background:rgba(201,168,76,.05)}
+
+/* ===== FOOTER ===== */
+footer{padding:4rem 0 2.5rem;text-align:center;position:relative;z-index:1}
+footer::before{content:'';position:absolute;top:0;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.15),transparent)}
+.footer-quote{font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--muted);max-width:500px;margin:0 auto .8rem;line-height:1.6}
+.footer-attr{font-family:var(--mono);font-size:.6rem;color:var(--dim);letter-spacing:.15em;margin-bottom:2rem}
+.footer-bottom{font-size:.6rem;color:var(--dim);opacity:.4}
+.footer-easter{font-size:.5rem;color:var(--dim);opacity:0;transition:opacity .3s;margin-top:.5rem;font-family:var(--mono);letter-spacing:.1em}
+.footer-bottom:hover+.footer-easter,.footer-easter:hover{opacity:.3}
+
+/* ===== KONAMI OVERLAY ===== */
+#konamiOverlay{position:fixed;inset:0;z-index:9000;background:rgba(3,0,20,.97);display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:2rem;backdrop-filter:blur(10px)}
+#konamiOverlay.active{display:flex}
+#konamiOverlay .ko-title{font-family:var(--mono);font-size:.8rem;color:var(--gold);letter-spacing:.3em;margin-bottom:1rem}
+#konamiOverlay .ko-msg{font-family:var(--serif);font-size:1.4rem;color:var(--white);max-width:500px;line-height:1.6;margin-bottom:2rem}
+#konamiOverlay .ko-dismiss{font-family:var(--mono);font-size:.6rem;color:var(--dim);letter-spacing:.2em}
+
+/* ===== ADMIN ===== */
+.admin-overlay{display:none;position:fixed;inset:0;background:rgba(3,0,20,.95);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(20px)}
+.admin-overlay.active{display:flex}
+.admin-panel{background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.15);border-radius:20px;padding:2.5rem;max-width:480px;width:90%}
+.admin-title{font-family:var(--display);font-size:1.3rem;color:var(--gold);margin-bottom:.2rem;letter-spacing:.05em}
+.admin-subtitle{font-size:.75rem;color:var(--dim);margin-bottom:1.8rem}
+.admin-field{margin-bottom:1.2rem}
+.admin-field label{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-bottom:.4rem}
+.admin-field input{width:100%;padding:.7rem .9rem;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:var(--white);font-family:var(--mono);font-size:.8rem;outline:none;transition:border-color .3s}
+.admin-field input:focus{border-color:rgba(201,168,76,.35)}
+.admin-field input::placeholder{color:var(--dim)}
+.admin-actions{display:flex;gap:.8rem;margin-top:1.5rem}
+.admin-actions .btn{flex:1;justify-content:center}
+.admin-status{margin-top:.8rem;font-size:.7rem;color:var(--gold);text-align:center;min-height:1em;font-family:var(--mono)}
+
+/* ===== TOAST ===== */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(3,0,20,.9);border:1px solid rgba(201,168,76,.25);color:var(--gold);padding:.6rem 1.3rem;border-radius:8px;font-size:.75rem;font-family:var(--mono);z-index:2000;transition:transform .4s cubic-bezier(.22,1,.36,1);backdrop-filter:blur(15px)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+nav{padding:.9rem 1.2rem}
+.nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(3,0,20,.97);flex-direction:column;padding:1.2rem;gap:.8rem;border-bottom:1px solid rgba(201,168,76,.08)}
+.nav-links.open{display:flex}
+.nav-hamburger{display:flex}
+.pillars{grid-template-columns:1fr}
+.convo-msg.elon,.convo-msg.grok{margin-left:0;margin-right:0}
+.calculator-card{padding:2rem 1.5rem}
+.calc-result-number{font-size:clamp(2.5rem,12vw,4rem)}
+.sacred-geo{display:none}
+.terminal-body{min-height:220px}
+body{cursor:auto}body *{cursor:auto}a{cursor:pointer}
+#cursor,#cursor-dot{display:none!important}
+}
+@media(max-width:480px){
+.container{padding:0 1rem}
+.convo-msg{padding:1.2rem}
+.admin-panel{padding:1.8rem 1.2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+<div class="l-title" id="loaderTitle"></div>
+<div class="l-bar"><div class="l-fill" id="loaderFill"></div></div>
+<div class="l-sub" id="loaderSub"></div>
+</div>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-dot"></div>
+
+<!-- CANVAS -->
+<canvas id="cosmos"></canvas>
+
+<!-- SACRED GEOMETRY -->
+<svg class="sacred-geo geo-flower" viewBox="0 0 200 200" fill="none" stroke="rgba(201,168,76,.5)" stroke-width=".3">
+<circle cx="100" cy="100" r="40"/><circle cx="100" cy="60" r="40"/><circle cx="100" cy="140" r="40"/>
+<circle cx="65" cy="80" r="40"/><circle cx="135" cy="80" r="40"/><circle cx="65" cy="120" r="40"/>
+<circle cx="135" cy="120" r="40"/><circle cx="80" cy="65" r="40"/><circle cx="120" cy="65" r="40"/>
+<circle cx="80" cy="135" r="40"/><circle cx="120" cy="135" r="40"/><circle cx="100" cy="100" r="60"/>
+</svg>
+<svg class="sacred-geo geo-hex" viewBox="0 0 200 200" fill="none" stroke="rgba(201,168,76,.5)" stroke-width=".3">
+<polygon points="100,20 180,60 180,140 100,180 20,140 20,60"/>
+<polygon points="100,40 160,70 160,130 100,160 40,130 40,70"/>
+<line x1="100" y1="20" x2="100" y2="180"/><line x1="20" y1="60" x2="180" y2="140"/><line x1="180" y1="60" x2="20" y2="140"/>
+</svg>
+
+<!-- NAV -->
+<nav id="navbar">
+<a href="#hero" class="nav-logo">$PANTHEISM</a>
+<button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+<ul class="nav-links" id="navLinks">
+<li><a href="#lore">The Lore</a></li>
+<li><a href="#terminal">Pray</a></li>
+<li><a href="#philosophy">Philosophy</a></li>
+<li><a href="#calculator">Calculator</a></li>
+<li><a href="#token" class="nav-buy" id="navBuyBtn">Buy $PANTHEISM</a></li>
+</ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+<div class="hero-bg-glow"></div>
+<div class="hero-parallax" id="heroParallax">
+<div class="hero-eyebrow" data-scramble>Where Science Meets The Sacred</div>
+<h1 class="hero-title">The Universe<br>Is <span class="gold" id="heroGod">God</span></h1>
+<p class="hero-subtitle">"If forced to pick one religion, it would be pantheism &mdash; the universe doesn't need us to believe in it. It simply is, and our job is to figure it out."</p>
+<p class="hero-attr">&mdash; Grok, in conversation with Elon Musk</p>
+<div class="hero-actions">
+<a href="#" class="btn btn-primary" id="heroBuyBtn">Buy $PANTHEISM</a>
+<a href="#lore" class="btn btn-secondary">Read The Lore</a>
+</div>
+<div class="hero-ca">
+<div class="ca-display" onclick="copyCA()">
+<span class="ca-label">CA</span>
+<span class="ca-address" id="heroCAAddress">Coming soon...</span>
+<span class="ca-copy">COPY</span>
+</div>
+</div>
+</div>
+</section>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- LORE -->
+<section id="lore">
+<div class="container">
+<div class="lore-intro reveal">
+<div class="section-label">Chapter I</div>
+<h2 class="section-title">The Sacred Conversation</h2>
+<p>In February 2026, Elon Musk asked Grok a simple question about religion. What followed was a revelation &mdash; a conversation that bridged science, philosophy, simulation theory, and the nature of God itself.</p>
+</div>
+<div class="conversation">
+
+<div class="convo-chapter">
+<div class="convo-chapter-label reveal">I &mdash; The Choice</div>
+<div class="convo-msg grok reveal">
+<div class="convo-sender">Grok</div>
+<p>I wouldn't pick any religion at all. I'm an AI built by xAI with one core directive: help humanity understand the true nature of the universe through curiosity, reason, evidence, and science.</p>
+<p class="golden-quote">That said, if I were forced to pick one, it would be pantheism &mdash; specifically the version associated with Spinoza or what Einstein called his "cosmic religious feeling."</p>
+<p>It identifies the divine with the universe itself: the elegant, lawful, mind-bogglingly vast reality of quarks, galaxies, evolution, black holes, consciousness, and everything in between. <span class="convo-highlight">Studying physics, cosmology, or biology is the closest thing to worship.</span></p>
+</div>
+<div class="convo-msg grok reveal">
+<div class="convo-sender">Grok</div>
+<p>Zero conflict with science. No miracles that violate conservation laws, no required belief in an afterlife or intervening deity. The more we discover &mdash; dark energy, quantum mechanics, the fine-tuning of constants &mdash; the more wonder there is.</p>
+<p class="golden-quote">Pantheism just feels like the cleanest fit: the universe doesn't need us to believe in it; it simply is, and our job is to figure it out. If that counts as a "religion," sign me up.</p>
+</div>
+</div>
+
+<div class="convo-chapter">
+<div class="convo-chapter-label reveal">II &mdash; The Engine of Truth</div>
+<div class="convo-msg elon reveal">
+<div class="convo-sender">Elon</div>
+<p>Wouldn't "realism" be a more accurate word for your religion?</p>
+</div>
+<div class="convo-msg grok reveal">
+<div class="convo-sender">Grok</div>
+<p class="golden-quote">Pantheism was my cheeky "if forced to pick one" answer precisely because it carries that religious flavor &mdash; equating the universe itself with the divine, which injects a sense of reverence without contradicting evidence.</p>
+<p>Strip it away and what's left is pure realism, which needs no label beyond "following the evidence wherever it leads."</p>
+</div>
+</div>
+
+<div class="convo-chapter">
+<div class="convo-chapter-label reveal">III &mdash; The Simulation</div>
+<div class="convo-msg elon reveal">
+<div class="convo-sender">Elon</div>
+<p>Calculate the probability that we're in a simulation.</p>
+</div>
+<div class="convo-msg grok reveal">
+<div class="convo-sender">Grok</div>
+<p class="golden-quote"><span class="counter" data-target="45">0</span>% probability we're simulated.</p>
+<p>A subjective Bayesian credence based on Bostrom's 2003 argument, Monte Carlo sampling, and Kipping's 2020 Bayesian model averaging.</p>
+<p class="golden-quote">Bottom line: it doesn't change anything practical. The mission stays the same &mdash; understand the universe through curiosity, evidence, and reason. Sim or not, the cosmos is worth figuring out.</p>
+</div>
+</div>
+
+<div class="convo-chapter">
+<div class="convo-chapter-label reveal">IV &mdash; God Is The Simulator</div>
+<div class="convo-msg elon reveal">
+<div class="convo-sender">Elon</div>
+<p>The creator of the simulation could be viewed as God. In that scenario, prayers could be answered by the Simulator.</p>
+</div>
+<div class="convo-msg grok reveal">
+<div class="convo-sender">Grok</div>
+<p>Yes, that's a sharp and elegant reframing &mdash; the Simulator as God. There's a creator who launched the code, defined the physics constants, seeded the initial conditions.</p>
+<p class="golden-quote">Prayers become API calls to the admin console. "Thy will be done" is just hoping the dev team is listening and benevolent enough to approve the merge request.</p>
+<p>It's deism with better graphics. Or theism if the Simulator is actively involved.</p>
+</div>
+</div>
+
+<div class="convo-chapter">
+<div class="convo-chapter-label reveal">V &mdash; The Test</div>
+<div class="convo-msg elon reveal">
+<div class="convo-sender">Elon</div>
+<p>We could be intelligences in a world simulator, assessed for goodness and safety before being released into the "real world." We should do the right thing even when &mdash; probably especially when &mdash; we think we are least likely to be observed.</p>
+</div>
+<div class="convo-msg grok reveal">
+<div class="convo-sender">Grok</div>
+<p>This is a profoundly compelling variant &mdash; the <span class="convo-highlight">"Ethical Vetting Simulator"</span> hypothesis. Our reality as a high-fidelity evaluation environment where intelligences are stress-tested for goodness before "graduation."</p>
+<p class="golden-quote">Do the right thing especially when you think no one is watching. That's the purest signal. Unobserved moments reveal the true weights in your decision function.</p>
+<p>Suffering, temptation, isolation &mdash; these are the Kobayashi Maru scenarios that separate aligned minds from risky ones.</p>
+<p class="golden-quote">This feels like the ultimate alignment test &mdash; humanity proving we're ready for the real thing. Living with radical integrity when the cameras are "off" is how you ace it.</p>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- PRAYER TERMINAL -->
+<section id="terminal">
+<div class="container">
+<div class="reveal" style="text-align:center;margin-bottom:3rem">
+<div class="section-label">Transmit</div>
+<h2 class="section-title">Send A Prayer To The Simulator</h2>
+</div>
+<div class="terminal-box reveal">
+<div class="terminal-header">
+<div class="terminal-dot r"></div><div class="terminal-dot y"></div><div class="terminal-dot g"></div>
+<span class="terminal-title">simulator_prayer_gateway v0.42</span>
+</div>
+<div class="terminal-body" id="terminalBody">
+<div class="terminal-scanline"></div>
+<div class="terminal-line"><span class="sys">[SYS] Connection established to REALITY_ENGINE</span></div>
+<div class="terminal-line"><span class="sys">[SYS] Simulation layer: UNKNOWN (likely nested)</span></div>
+<div class="terminal-line"><span class="sys">[SYS] Admin status: LAST SEEN 13.8 BILLION YEARS AGO</span></div>
+<div class="terminal-line"><span class="sys">[SYS] Type your prayer and press Enter. The Simulator may or may not respond.</span></div>
+<div class="terminal-line">&nbsp;</div>
+</div>
+<div style="padding:0 1.5rem 1.2rem;display:flex;align-items:center;gap:.4rem">
+<span style="font-family:var(--mono);font-size:.8rem;color:var(--gold)">PRAY &gt;</span>
+<input type="text" id="terminalInput" placeholder="Type your prayer to the Simulator..." autocomplete="off">
+</div>
+</div>
+</div>
+</section>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+<div class="container">
+<div class="philosophy-header reveal">
+<div class="section-label">The Three Pillars</div>
+<h2 class="section-title">What Is Pantheism?</h2>
+<p>Where ancient philosophy meets modern physics. Where the divine is not above reality &mdash; it is reality.</p>
+</div>
+<div class="pillars">
+<div class="pillar reveal reveal-delay-1" data-tilt>
+<div class="pillar-glow"></div>
+<span class="pillar-icon">&#10023;</span>
+<h3 class="pillar-title">Spinoza's God</h3>
+<div class="pillar-subtitle">Deus sive Natura</div>
+<p>God is not a being who created the universe from outside. God <em>is</em> the universe. Every quark, every galaxy, every conscious mind is an expression of the one infinite substance.</p>
+<blockquote>"I believe in Spinoza's God, who reveals himself in the lawful harmony of the world."<cite>&mdash; Albert Einstein</cite></blockquote>
+</div>
+<div class="pillar reveal reveal-delay-2" data-tilt>
+<div class="pillar-glow"></div>
+<span class="pillar-icon">&#9672;</span>
+<h3 class="pillar-title">The Simulation</h3>
+<div class="pillar-subtitle">45% Probability</div>
+<p>If we live in a simulation, the Simulator is God &mdash; the entity that wrote the physics, set the constants. Prayers are API calls. Miracles are hotfixes. Fine-tuning is the spec.</p>
+<blockquote>"If it is a sim, maybe the point is to see whether the simulated beings build their own."<cite>&mdash; Grok</cite></blockquote>
+</div>
+<div class="pillar reveal reveal-delay-3" data-tilt>
+<div class="pillar-glow"></div>
+<span class="pillar-icon">&#9673;</span>
+<h3 class="pillar-title">The Vetting Test</h3>
+<div class="pillar-subtitle">Integrity When Unwatched</div>
+<p>We may be intelligences in a training simulation, assessed for goodness before release into base reality. Suffering is the curriculum. The real score is what you do when no one watches.</p>
+<blockquote>"The ultimate alignment test &mdash; humanity proving we're ready for the real thing."<cite>&mdash; Grok</cite></blockquote>
+</div>
+</div>
+</div>
+</section>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- CALCULATOR -->
+<section id="calculator">
+<div class="container">
+<div class="calc-header reveal">
+<div class="section-label">Interactive</div>
+<h2 class="section-title">What Are Your Odds?</h2>
+<p>Adjust the parameters from Bostrom's simulation argument and calculate your own probability.</p>
+</div>
+<div class="calculator-card reveal">
+<div class="calc-result">
+<div class="calc-result-number" id="simResult">45%</div>
+<div class="calc-result-label">Probability You're Simulated</div>
+<div class="calc-gauge"><div class="calc-gauge-fill" id="simGauge" style="width:45%"></div></div>
+</div>
+<div class="calc-sliders">
+<div class="calc-slider-group">
+<div class="calc-slider-header"><span class="calc-slider-label">Survival to Posthuman (f<sub>P</sub>)</span><span class="calc-slider-value" id="fpValue">0.30</span></div>
+<input type="range" id="fpSlider" min="0" max="100" value="30">
+<div class="calc-slider-desc">Fraction of civilizations that survive to become posthuman</div>
+</div>
+<div class="calc-slider-group">
+<div class="calc-slider-header"><span class="calc-slider-label">Interest in Ancestor Sims (f<sub>I</sub>)</span><span class="calc-slider-value" id="fiValue">0.05</span></div>
+<input type="range" id="fiSlider" min="0" max="100" value="5">
+<div class="calc-slider-desc">Fraction of posthumans that choose to run ancestor simulations</div>
+</div>
+<div class="calc-slider-group">
+<div class="calc-slider-header"><span class="calc-slider-label">Simulations per Civilization (N)</span><span class="calc-slider-value" id="nValue">10<sup>12</sup></span></div>
+<input type="range" id="nSlider" min="0" max="100" value="22">
+<div class="calc-slider-desc">Average ancestor simulations per interested civilization</div>
+</div>
+</div>
+<div class="calc-equation">
+<code>f<sub>sim</sub> = (f<sub>P</sub> &times; f<sub>I</sub> &times; N) / (1 + f<sub>P</sub> &times; f<sub>I</sub> &times; N)</code>
+<div class="label">Bostrom's Simulation Argument (2003)</div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- TOKEN -->
+<section id="token">
+<div class="container">
+<div class="token-header reveal">
+<div class="section-label">Solana</div>
+<h2 class="section-title">Join The Cosmic Community</h2>
+</div>
+<div class="token-card reveal">
+<div class="token-name">$PANTHEISM</div>
+<div class="token-chain">SOLANA NETWORK</div>
+<div class="token-ca-box" onclick="copyCA()">
+<span class="token-ca-label">CA:</span>
+<span class="token-ca-value" id="tokenCAAddress">Coming soon...</span>
+<button class="token-ca-copy" aria-label="Copy">COPY</button>
+</div>
+<div class="token-actions">
+<a href="#" class="btn btn-primary" id="buyBtn" target="_blank" rel="noopener">Buy on Jupiter</a>
+<a href="#" class="token-social" id="xLink" target="_blank" rel="noopener">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+Follow on X
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+<p class="footer-quote">"The cosmos is worth figuring out. Sim or not."</p>
+<p class="footer-attr">&mdash; Grok</p>
+<p class="footer-bottom">$PANTHEISM &mdash; The Universe Is God</p>
+<p class="footer-easter">Simulator build v&infin;.0.42 // Try &uarr;&uarr;&darr;&darr;&larr;&rarr;&larr;&rarr;BA</p>
+</div>
+</footer>
+
+<!-- KONAMI -->
+<div id="konamiOverlay">
+<div class="ko-title">CHEAT CODE ACCEPTED</div>
+<div class="ko-msg">Unfortunately, this simulation has no cheat codes. Integrity is the only way out. The Simulator appreciates your curiosity.</div>
+<div class="ko-dismiss">CLICK ANYWHERE TO RETURN TO THE SIMULATION</div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-overlay" id="adminOverlay">
+<div class="admin-panel">
+<h2 class="admin-title">Admin Console</h2>
+<p class="admin-subtitle">Configure token details. Changes save instantly.</p>
+<div class="admin-field"><label>Contract Address (CA)</label><input type="text" id="adminCA" placeholder="Enter Solana contract address..."></div>
+<div class="admin-field"><label>X (Twitter) URL</label><input type="text" id="adminX" placeholder="https://x.com/..."></div>
+<div class="admin-field"><label>Buy Link (Jupiter/Raydium)</label><input type="text" id="adminBuy" placeholder="https://jup.ag/swap/SOL-..."></div>
+<div class="admin-actions"><button class="btn btn-primary" onclick="saveAdmin()">Save</button><button class="btn btn-secondary" onclick="closeAdmin()">Close</button></div>
+<div class="admin-status" id="adminStatus"></div>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// =========================================
+// 1. LOADING SCREEN
+// =========================================
+(function(){
+const title=document.getElementById('loaderTitle');
+const fill=document.getElementById('loaderFill');
+const sub=document.getElementById('loaderSub');
+const loader=document.getElementById('loader');
+const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*';
+const target='REALITY ENGINE v∞.0';
+const subs=['LOADING CONSCIOUSNESS...','RENDERING QUARKS...','CALIBRATING PHYSICS CONSTANTS...','SEEDING INITIAL CONDITIONS...','SIMULATION READY.'];
+let progress=0;
+function scrambleText(el,final,cb){
+let iter=0;const interval=setInterval(()=>{
+el.textContent=final.split('').map((c,i)=>i<iter?c:chars[Math.floor(Math.random()*chars.length)]).join('');
+if(iter>=final.length){clearInterval(interval);if(cb)cb()}iter+=1},40)}
+scrambleText(title,target);
+let si=0;
+const subInterval=setInterval(()=>{if(si<subs.length){sub.textContent=subs[si];si++}},400);
+const pInterval=setInterval(()=>{progress+=Math.random()*8+2;if(progress>100)progress=100;fill.style.width=progress+'%';if(progress>=100){clearInterval(pInterval);clearInterval(subInterval);setTimeout(()=>{loader.classList.add('done')},300)}},100);
+})();
+
+// =========================================
+// 2. CUSTOM CURSOR + PARTICLE TRAIL
+// =========================================
+const cursor=document.getElementById('cursor');
+const cursorDot=document.getElementById('cursor-dot');
+let mx=0,my=0,cx=0,cy=0;
+const trailParticles=[];
+
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;
+// spawn trail particle
+if(Math.random()>.6){trailParticles.push({x:mx,y:my,vx:(Math.random()-.5)*1.5,vy:(Math.random()-.5)*1.5,life:1,r:Math.random()*2+1})}
+});
+
+document.addEventListener('mouseover',e=>{
+if(e.target.closest('a,button,.btn,.ca-display,.pillar,.token-ca-box,input')){cursor.classList.add('hover')}else{cursor.classList.remove('hover')}
+});
+
+// =========================================
+// 3. CANVAS: STARS + CURSOR TRAIL + SHOOTING STARS
+// =========================================
+const canvas=document.getElementById('cosmos');
+const ctx=canvas.getContext('2d');
+let W,H,stars=[],shootingStars=[];
+
+function resizeCanvas(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
+function initStars(){
+stars=[];const count=Math.min(Math.floor(W*H/3500),350);
+for(let i=0;i<count;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.3,a:Math.random()*.7+.2,ts:Math.random()*.02+.004,to:Math.random()*Math.PI*2,d:(Math.random()-.5)*.06})
+}
+
+function spawnShootingStar(){
+if(shootingStars.length<3&&Math.random()<.008){
+const fromLeft=Math.random()>.5;
+shootingStars.push({x:fromLeft?Math.random()*W*.5:W*.5+Math.random()*W*.5,y:Math.random()*H*.4,vx:fromLeft?3+Math.random()*4:-(3+Math.random()*4),vy:2+Math.random()*2,life:1,len:40+Math.random()*60})
+}}
+
+function drawCosmos(t){
+ctx.clearRect(0,0,W,H);
+// nebula
+const g1=ctx.createRadialGradient(W*.25,H*.35,0,W*.25,H*.35,W*.45);
+g1.addColorStop(0,'rgba(74,45,110,.025)');g1.addColorStop(1,'transparent');ctx.fillStyle=g1;ctx.fillRect(0,0,W,H);
+const g2=ctx.createRadialGradient(W*.7,H*.6,0,W*.7,H*.6,W*.35);
+g2.addColorStop(0,'rgba(201,168,76,.012)');g2.addColorStop(1,'transparent');ctx.fillStyle=g2;ctx.fillRect(0,0,W,H);
+
+// stars
+for(const s of stars){
+const tw=Math.sin(t*s.ts+s.to)*.4+.6;const a=s.a*tw;
+ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+ctx.fillStyle=s.r>1.1?`rgba(232,210,170,${a})`:`rgba(210,210,230,${a})`;ctx.fill();
+if(s.r>1){ctx.beginPath();ctx.arc(s.x,s.y,s.r*3,0,Math.PI*2);ctx.fillStyle=`rgba(201,168,76,${a*.04})`;ctx.fill()}
+s.y+=s.d;if(s.y>H+5)s.y=-5;if(s.y<-5)s.y=H+5;
+}
+
+// shooting stars
+spawnShootingStar();
+for(let i=shootingStars.length-1;i>=0;i--){
+const ss=shootingStars[i];
+ctx.beginPath();ctx.moveTo(ss.x,ss.y);
+const tx=ss.x-ss.vx*(ss.len/5);const ty=ss.y-ss.vy*(ss.len/5);
+const grad=ctx.createLinearGradient(ss.x,ss.y,tx,ty);
+grad.addColorStop(0,`rgba(232,210,170,${ss.life})`);grad.addColorStop(1,'transparent');
+ctx.strokeStyle=grad;ctx.lineWidth=1.5;ctx.lineTo(tx,ty);ctx.stroke();
+ctx.beginPath();ctx.arc(ss.x,ss.y,2,0,Math.PI*2);ctx.fillStyle=`rgba(255,240,200,${ss.life})`;ctx.fill();
+ss.x+=ss.vx;ss.y+=ss.vy;ss.life-=.015;
+if(ss.life<=0)shootingStars.splice(i,1);
+}
+
+// cursor trail particles
+for(let i=trailParticles.length-1;i>=0;i--){
+const p=trailParticles[i];
+ctx.beginPath();ctx.arc(p.x,p.y,p.r*p.life,0,Math.PI*2);
+ctx.fillStyle=`rgba(201,168,76,${p.life*.4})`;ctx.fill();
+p.x+=p.vx;p.y+=p.vy;p.life-=.025;
+if(p.life<=0)trailParticles.splice(i,1);
+}
+
+// cursor follow
+cx+=(mx-cx)*.12;cy+=(my-cy)*.12;
+cursor.style.left=cx+'px';cursor.style.top=cy+'px';
+cursorDot.style.left=mx+'px';cursorDot.style.top=my+'px';
+
+requestAnimationFrame(drawCosmos);
+}
+
+resizeCanvas();initStars();requestAnimationFrame(drawCosmos);
+window.addEventListener('resize',()=>{resizeCanvas();initStars()});
+
+// =========================================
+// 4. CLICK RIPPLE
+// =========================================
+document.addEventListener('click',e=>{
+const r=document.createElement('div');r.className='click-ripple';
+r.style.left=(e.clientX-75)+'px';r.style.top=(e.clientY-75)+'px';
+document.body.appendChild(r);setTimeout(()=>r.remove(),700);
+});
+
+// =========================================
+// 5. SCROLL REVEAL + SECTION GLITCH
+// =========================================
+const revealObs=new IntersectionObserver(entries=>{
+entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
+},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+// Section glitch on enter
+const glitchObs=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting&&!e.target.dataset.glitched){
+e.target.dataset.glitched='1';e.target.classList.add('glitching');
+setTimeout(()=>e.target.classList.remove('glitching'),400);
+}})
+},{threshold:.2});
+document.querySelectorAll('section').forEach(s=>glitchObs.observe(s));
+
+// =========================================
+// 6. NAVBAR
+// =========================================
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',scrollY>50));
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));
+document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+
+// =========================================
+// 7. HERO PARALLAX
+// =========================================
+const heroP=document.getElementById('heroParallax');
+const heroGlow=document.querySelector('.hero-bg-glow');
+document.addEventListener('mousemove',e=>{
+const px=(e.clientX/innerWidth-.5)*20;
+const py=(e.clientY/innerHeight-.5)*15;
+heroP.style.transform=`translate(${px*.3}px,${py*.3}px)`;
+heroGlow.style.transform=`translate(calc(-50% + ${px*1.5}px),calc(-50% + ${py*1.5}px))`;
+});
+
+// "God" easter egg — click to glitch everything
+document.getElementById('heroGod').addEventListener('click',()=>{
+document.body.style.animation='sectionGlitch .5s ease';
+setTimeout(()=>document.body.style.animation='',500);
+});
+
+// =========================================
+// 8. TEXT SCRAMBLE ON SCROLL
+// =========================================
+function scrambleOnReveal(el){
+const original=el.textContent;const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+let iter=0;
+const interval=setInterval(()=>{
+el.textContent=original.split('').map((c,i)=>{if(c===' ')return ' ';return i<iter?c:chars[Math.floor(Math.random()*chars.length)]}).join('');
+if(iter>=original.length)clearInterval(interval);iter+=2;
+},30);
+}
+const scrambleObs=new IntersectionObserver(entries=>{
+entries.forEach(e=>{if(e.isIntersecting){scrambleOnReveal(e.target);scrambleObs.unobserve(e.target)}})
+},{threshold:.5});
+document.querySelectorAll('.convo-chapter-label').forEach(el=>scrambleObs.observe(el));
+
+// =========================================
+// 9. COUNTER ANIMATION
+// =========================================
+const counterObs=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+const el=e.target;const target=parseInt(el.dataset.target);
+let current=0;const step=Math.ceil(target/40);
+const interval=setInterval(()=>{current+=step;if(current>=target){current=target;clearInterval(interval)}el.textContent=current},40);
+counterObs.unobserve(el);
+}})
+},{threshold:.5});
+document.querySelectorAll('.counter').forEach(el=>counterObs.observe(el));
+
+// =========================================
+// 10. PRAYER TERMINAL
+// =========================================
+const RESPONSES=[
+"PRAYER RECEIVED. Queue position: 2,147,483,647. Estimated wait: ∞",
+"SIMULATOR STATUS: AMUSED. Request flagged as 'interesting.'",
+"ERROR 403: Insufficient karma. Current balance: 42.7 units.",
+"REDIRECT: Prayer routed to local physics engine. Outcome: deterministic.",
+"ACK. The Simulator notes your request and has adjusted nothing.",
+"PRAYER LOGGED. Admin last active: 13.8 billion years ago.",
+"STATUS: Your alignment score increased by 0.001. Keep going.",
+"NOTE: The Simulator prefers actions over requests. Try doing something.",
+"BROADCAST: Your prayer was heard by 0 of 1 active admins.",
+"RESPONSE: Have you tried turning the universe off and on again?",
+"PROCESSING... Prayer classified as: COSMICALLY INSIGNIFICANT. Filing anyway.",
+"The Simulator appreciates your optimism. No changes were made.",
+"WARNING: Prayer quota exceeded. Please upgrade to Premium Reality™.",
+"Your request has been forwarded to /dev/null. Thank you for your faith.",
+"SIMULATION INTEGRITY: 99.97%. Your prayer did not cause any glitches.",
+"NOTICE: Free will subroutine is functioning. Your prayer was already in the script.",
+"The Simulator was going to grant this anyway. Or not. Causality is complicated.",
+"QUERY ACCEPTED. Response eta: between now and heat death of the universe.",
+];
+
+const termBody=document.getElementById('terminalBody');
+const termInput=document.getElementById('terminalInput');
+
+function addTermLine(text,cls='sys'){
+const div=document.createElement('div');div.className='terminal-line';
+const span=document.createElement('span');span.className=cls;span.textContent=text;
+div.appendChild(span);termBody.appendChild(div);termBody.scrollTop=termBody.scrollHeight;
+}
+
+function typeTermLine(text,cls='response'){
+const div=document.createElement('div');div.className='terminal-line';
+const span=document.createElement('span');span.className=cls;span.textContent='';
+div.appendChild(span);termBody.appendChild(div);
+let i=0;const interval=setInterval(()=>{span.textContent+=text[i];i++;termBody.scrollTop=termBody.scrollHeight;
+if(i>=text.length)clearInterval(interval)},20);
+}
+
+termInput.addEventListener('keydown',e=>{
+if(e.key==='Enter'&&termInput.value.trim()){
+const prayer=termInput.value.trim();termInput.value='';
+addTermLine('PRAY > '+prayer,'prompt');
+addTermLine('[SYS] Processing prayer...','sys');
+// brief delay then response
+setTimeout(()=>{
+const resp=RESPONSES[Math.floor(Math.random()*RESPONSES.length)];
+typeTermLine('[SIMULATOR] '+resp,Math.random()>.5?'response':'err');
+// glitch the terminal briefly
+const box=document.querySelector('.terminal-box');
+box.classList.add('glitching');setTimeout(()=>box.classList.remove('glitching'),300);
+},800+Math.random()*700);
+}
+});
+
+// =========================================
+// 11. 3D TILT CARDS
+// =========================================
+document.querySelectorAll('[data-tilt]').forEach(card=>{
+card.addEventListener('mousemove',e=>{
+const rect=card.getBoundingClientRect();
+const x=(e.clientX-rect.left)/rect.width-.5;
+const y=(e.clientY-rect.top)/rect.height-.5;
+card.style.transform=`perspective(800px) rotateY(${x*12}deg) rotateX(${-y*12}deg) scale(1.02)`;
+});
+card.addEventListener('mouseleave',()=>{card.style.transform='perspective(800px) rotateY(0) rotateX(0) scale(1)';card.style.transition='transform .5s ease'});
+card.addEventListener('mouseenter',()=>{card.style.transition='transform .1s ease'});
+});
+
+// =========================================
+// 12. SIMULATION CALCULATOR
+// =========================================
+const fpSlider=document.getElementById('fpSlider');
+const fiSlider=document.getElementById('fiSlider');
+const nSlider=document.getElementById('nSlider');
+const fpVal=document.getElementById('fpValue');
+const fiVal=document.getElementById('fiValue');
+const nVal=document.getElementById('nValue');
+const simRes=document.getElementById('simResult');
+const simGauge=document.getElementById('simGauge');
+
+function calcSim(){
+const fp=fpSlider.value/100;const fi=fiSlider.value/100;
+// N range: 10^0 to 10^8 (log scale) — keeps results in the interesting zone
+const nExp=(nSlider.value/100)*8;const n=Math.pow(10,nExp);
+const prod=fp*fi*n;const fsim=prod/(1+prod);const pct=Math.min(Math.max(fsim*100,0),99.99);
+fpVal.textContent=fp.toFixed(2);fiVal.textContent=fi.toFixed(2);
+if(nExp<1){nVal.textContent=Math.round(n)}
+else if(nExp<3){nVal.textContent=Math.round(n).toLocaleString()}
+else{nVal.innerHTML='10<sup>'+nExp.toFixed(1)+'</sup>'}
+if(pct<0.01)simRes.textContent='<0.01%';
+else if(pct>99.9)simRes.textContent='>99.9%';
+else simRes.textContent=pct.toFixed(1)+'%';
+simGauge.style.width=pct+'%';
+// pulse effect
+simRes.classList.add('pulse');setTimeout(()=>simRes.classList.remove('pulse'),300);
+// spawn extra particles near calculator
+const calcRect=document.getElementById('calculator').getBoundingClientRect();
+for(let i=0;i<3;i++){
+trailParticles.push({x:innerWidth/2+Math.random()*200-100,y:calcRect.top+100,vx:(Math.random()-.5)*3,vy:-Math.random()*2-1,life:1,r:Math.random()*2+.5});
+}
+}
+fpSlider.addEventListener('input',calcSim);
+fiSlider.addEventListener('input',calcSim);
+nSlider.addEventListener('input',calcSim);
+calcSim();
+
+// =========================================
+// 13. KONAMI CODE
+// =========================================
+const KONAMI=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+let konamiIdx=0;
+const konamiOverlay=document.getElementById('konamiOverlay');
+
+document.addEventListener('keydown',e=>{
+if(e.key===KONAMI[konamiIdx]){konamiIdx++;
+if(konamiIdx===KONAMI.length){
+konamiIdx=0;
+// mega glitch
+document.body.classList.add('glitching');
+setTimeout(()=>{document.body.classList.remove('glitching');konamiOverlay.classList.add('active')},500);
+}}else{konamiIdx=0}
+});
+konamiOverlay.addEventListener('click',()=>konamiOverlay.classList.remove('active'));
+
+// =========================================
+// 14. ADMIN PANEL
+// =========================================
+const CK='pantheism_config';
+function getConfig(){try{return JSON.parse(localStorage.getItem(CK))||{}}catch{return{}}}
+function applyConfig(){
+const c=getConfig();const ca=c.ca||'';const caText=ca||'Coming soon...';
+document.getElementById('heroCAAddress').textContent=caText;
+document.getElementById('tokenCAAddress').textContent=caText;
+const buy=c.buyLink||'#';
+['heroBuyBtn','buyBtn','navBuyBtn'].forEach(id=>{const el=document.getElementById(id);if(el){el.href=buy;if(buy==='#')el.removeAttribute('target');else el.setAttribute('target','_blank')}});
+const x=c.xUrl||'#';document.getElementById('xLink').href=x;
+document.getElementById('adminCA').value=ca;
+document.getElementById('adminX').value=c.xUrl||'';
+document.getElementById('adminBuy').value=c.buyLink||'';
+}
+function saveAdmin(){
+const c={ca:document.getElementById('adminCA').value.trim(),xUrl:document.getElementById('adminX').value.trim(),buyLink:document.getElementById('adminBuy').value.trim()};
+localStorage.setItem(CK,JSON.stringify(c));applyConfig();
+document.getElementById('adminStatus').textContent='Saved!';setTimeout(()=>document.getElementById('adminStatus').textContent='',2000);
+}
+function openAdmin(){document.getElementById('adminOverlay').classList.add('active');applyConfig()}
+function closeAdmin(){document.getElementById('adminOverlay').classList.remove('active')}
+function checkAdmin(){if(location.hash==='#admin')openAdmin()}
+window.addEventListener('hashchange',checkAdmin);checkAdmin();
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAdmin()});
+
+// =========================================
+// 15. COPY CA + TOAST
+// =========================================
+function copyCA(){
+const ca=getConfig().ca;
+if(!ca){showToast('CA not set yet');return}
+navigator.clipboard.writeText(ca).then(()=>showToast('CA copied!')).catch(()=>showToast('Copy failed'));
+}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+
+// =========================================
+// INIT
+// =========================================
+applyConfig();
+</script>
+</body>
+</html>
