@@ -1022,7 +1022,7 @@ const pass=document.getElementById('adminPass').value;
 const status=document.getElementById('adminLoginStatus');
 status.textContent='Verifying...';
 try{
-const r=await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pass,ca:siteConfig.ca||'',xUrl:siteConfig.xUrl||''})});
+const r=await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pass,action:'login'})});
 if(r.ok){
 adminPass=pass;
 document.getElementById('adminLogin').style.display='none';

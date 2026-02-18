@@ -4,18 +4,27 @@ const ADMIN_PASS = process.env.ADMIN_PASSWORD || 'admin';
 const REDIS_KEY = 'pantheism:config';
 
 async function redisGet() {
-  const res = await fetch(`${UPSTASH_URL}/get/${REDIS_KEY}`, {
-    headers: { Authorization: `Bearer ${UPSTASH_TOKEN}` },
-  });
-  const data = await res.json();
-  if (data.result) {
-    try { return JSON.parse(data.result); } catch { return {}; }
+  if (!UPSTASH_URL || !UPSTASH_TOKEN) return {};
+  try {
+    const res = await fetch(`${UPSTASH_URL}/get/${REDIS_KEY}`, {
+      headers: { Authorization: `Bearer ${UPSTASH_TOKEN}` },
+    });
+    const data = await res.json();
+    if (data.result) {
+      try { return JSON.parse(data.result); } catch { return {}; }
+    }
+    return {};
+  } catch (e) {
+    console.error('Redis GET error:', e.message);
+    return {};
   }
-  return {};
 }
 
 async function redisSet(value) {
-  await fetch(`${UPSTASH_URL}/set/${REDIS_KEY}`, {
+  if (!UPSTASH_URL || !UPSTASH_TOKEN) {
+    throw new Error('Redis credentials not configured');
+  }
+  const res = await fetch(`${UPSTASH_URL}/set/${REDIS_KEY}`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${UPSTASH_TOKEN}`,
@@ -23,6 +32,10 @@ async function redisSet(value) {
     },
     body: JSON.stringify(JSON.stringify(value)),
   });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Redis SET failed: ${res.status} ${text}`);
+  }
 }
 
 export default async function handler(req, res) {
@@ -32,20 +45,34 @@ export default async function handler(req, res) {
 
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  if (req.method === 'GET') {
-    const config = await redisGet();
-    return res.status(200).json(config);
-  }
-
-  if (req.method === 'POST') {
-    const { password, ca, xUrl } = req.body;
-    if (password !== ADMIN_PASS) {
-      return res.status(401).json({ error: 'Wrong password' });
+  try {
+    if (req.method === 'GET') {
+      const config = await redisGet();
+      return res.status(200).json(config);
     }
-    const config = { ca: ca || '', xUrl: xUrl || '' };
-    await redisSet(config);
-    return res.status(200).json({ ok: true });
-  }
 
-  return res.status(405).json({ error: 'Method not allowed' });
+    if (req.method === 'POST') {
+      const { password, ca, xUrl, action } = req.body || {};
+
+      // Password check
+      if (password !== ADMIN_PASS) {
+        return res.status(401).json({ error: 'Wrong password' });
+      }
+
+      // Just verifying password, don't touch Redis
+      if (action === 'login') {
+        return res.status(200).json({ ok: true });
+      }
+
+      // Save config
+      const config = { ca: ca || '', xUrl: xUrl || '' };
+      await redisSet(config);
+      return res.status(200).json({ ok: true });
+    }
+
+    return res.status(405).json({ error: 'Method not allowed' });
+  } catch (e) {
+    console.error('API error:', e.message);
+    return res.status(500).json({ error: e.message });
+  }
 }
