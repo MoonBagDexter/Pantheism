@@ -96,6 +96,7 @@ section{position:relative;z-index:1}
 #hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
 .hero-bg-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,rgba(45,22,84,.04) 40%,transparent 70%);animation:heroPulse 8s ease-in-out infinite;pointer-events:none}
 @keyframes heroPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1}50%{transform:translate(-50%,-50%) scale(1.2);opacity:.6}}
+@keyframes loaderPulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.15);opacity:.4}}
 .hero-parallax{position:relative;z-index:2;will-change:transform}
 .hero-eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;opacity:0;animation:fadeUp 1s ease .5s forwards}
 .hero-title{font-family:var(--display);font-size:clamp(2.5rem,9vw,6rem);font-weight:900;line-height:1;margin-bottom:1.5rem;letter-spacing:.03em;opacity:0;animation:fadeUp 1s ease .7s forwards}
@@ -304,7 +305,7 @@ body{cursor:auto}body *{cursor:auto}a{cursor:pointer}
 
 <!-- LOADER -->
 <div id="loader">
-<svg class="l-logo" width="64" height="64" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:1.5rem;opacity:.7;animation:heroPulse 4s ease-in-out infinite">
+<svg class="l-logo" width="64" height="64" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:1.5rem;opacity:.7;animation:loaderPulse 4s ease-in-out infinite">
 <circle cx="256" cy="256" r="210" stroke="#c9a84c" stroke-width="5" opacity=".35"/>
 <circle cx="256" cy="256" r="100" stroke="#c9a84c" stroke-width="3.5" opacity=".4"/>
 <circle cx="256" cy="156" r="100" stroke="#c9a84c" stroke-width="2.5" opacity=".18"/>
