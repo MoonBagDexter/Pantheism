@@ -609,7 +609,7 @@ body{cursor:auto}body *{cursor:auto}a{cursor:pointer}
 <button class="token-ca-copy" aria-label="Copy">COPY</button>
 </div>
 <div class="token-actions">
-<a href="#" class="btn btn-primary" id="buyBtn" target="_blank" rel="noopener">Buy on Jupiter</a>
+<a href="#" class="btn btn-primary" id="buyBtn" target="_blank" rel="noopener">Buy on Pump.fun</a>
 <a href="#" class="token-social" id="xLink" target="_blank" rel="noopener">
 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
 Follow on X
@@ -638,12 +638,18 @@ Follow on X
 
 <!-- ADMIN -->
 <div class="admin-overlay" id="adminOverlay">
-<div class="admin-panel">
+<div class="admin-panel" id="adminLogin">
+<h2 class="admin-title">Admin Access</h2>
+<p class="admin-subtitle">Restricted area. Enter password to continue.</p>
+<div class="admin-field"><label>Password</label><input type="password" id="adminPass" placeholder="Enter admin password..."></div>
+<div class="admin-actions"><button class="btn btn-primary" onclick="loginAdmin()">Enter</button><button class="btn btn-secondary" onclick="closeAdmin()">Cancel</button></div>
+<div class="admin-status" id="adminLoginStatus"></div>
+</div>
+<div class="admin-panel" id="adminPanel" style="display:none">
 <h2 class="admin-title">Admin Console</h2>
-<p class="admin-subtitle">Configure token details. Changes save instantly.</p>
+<p class="admin-subtitle">Configure token details. Buy link auto-generates from CA via pump.fun.</p>
 <div class="admin-field"><label>Contract Address (CA)</label><input type="text" id="adminCA" placeholder="Enter Solana contract address..."></div>
 <div class="admin-field"><label>X (Twitter) URL</label><input type="text" id="adminX" placeholder="https://x.com/..."></div>
-<div class="admin-field"><label>Buy Link (Jupiter/Raydium)</label><input type="text" id="adminBuy" placeholder="https://jup.ag/swap/SOL-..."></div>
 <div class="admin-actions"><button class="btn btn-primary" onclick="saveAdmin()">Save</button><button class="btn btn-secondary" onclick="closeAdmin()">Close</button></div>
 <div class="admin-status" id="adminStatus"></div>
 </div>
@@ -975,34 +981,48 @@ konamiOverlay.addEventListener('click',()=>konamiOverlay.classList.remove('activ
 // 14. ADMIN PANEL
 // =========================================
 const CK='pantheism_config';
+const ADMIN_HASH='8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';// sha256 of 'admin' — change this
+let adminAuthed=false;
+async function hashPass(p){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(p));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')}
 function getConfig(){try{return JSON.parse(localStorage.getItem(CK))||{}}catch{return{}}}
 function applyConfig(){
 const c=getConfig();const ca=c.ca||'';const caText=ca||'Coming soon...';
 document.getElementById('heroCAAddress').textContent=caText;
 document.getElementById('tokenCAAddress').textContent=caText;
-const buy=c.buyLink||'#';
+const buy=ca?'https://pump.fun/coin/'+ca:'#';
 ['heroBuyBtn','buyBtn','navBuyBtn'].forEach(id=>{const el=document.getElementById(id);if(el){el.href=buy;if(buy==='#')el.removeAttribute('target');else el.setAttribute('target','_blank')}});
 const x=c.xUrl||'#';document.getElementById('xLink').href=x;
-document.getElementById('adminCA').value=ca;
-document.getElementById('adminX').value=c.xUrl||'';
-document.getElementById('adminBuy').value=c.buyLink||'';
+if(document.getElementById('adminCA'))document.getElementById('adminCA').value=ca;
+if(document.getElementById('adminX'))document.getElementById('adminX').value=c.xUrl||'';
 }
 function saveAdmin(){
-const c={ca:document.getElementById('adminCA').value.trim(),xUrl:document.getElementById('adminX').value.trim(),buyLink:document.getElementById('adminBuy').value.trim()};
+const c={ca:document.getElementById('adminCA').value.trim(),xUrl:document.getElementById('adminX').value.trim()};
 localStorage.setItem(CK,JSON.stringify(c));applyConfig();
 document.getElementById('adminStatus').textContent='Saved!';setTimeout(()=>document.getElementById('adminStatus').textContent='',2000);
 }
-function openAdmin(){document.getElementById('adminOverlay').classList.add('active');applyConfig()}
-function closeAdmin(){
-const c=getConfig();
-if(!c.ca){showToast('Enter a CA before closing');return}
-document.getElementById('adminOverlay').classList.remove('active');
+function openAdmin(){
+document.getElementById('adminOverlay').classList.add('active');
+document.getElementById('adminLogin').style.display='block';
+document.getElementById('adminPanel').style.display='none';
+adminAuthed=false;
 }
-function checkAdmin(){
-const c=getConfig();
-if(location.hash==='#admin'||!c.ca)openAdmin();
+async function loginAdmin(){
+const pass=document.getElementById('adminPass').value;
+const h=await hashPass(pass);
+if(h===ADMIN_HASH){
+adminAuthed=true;
+document.getElementById('adminLogin').style.display='none';
+document.getElementById('adminPanel').style.display='block';
+applyConfig();
+}else{
+document.getElementById('adminLoginStatus').textContent='Wrong password.';
+setTimeout(()=>document.getElementById('adminLoginStatus').textContent='',2000);
 }
+}
+function closeAdmin(){document.getElementById('adminOverlay').classList.remove('active');adminAuthed=false}
+function checkAdmin(){if(location.hash==='#admin')openAdmin()}
 window.addEventListener('hashchange',checkAdmin);checkAdmin();
+document.getElementById('adminPass').addEventListener('keydown',e=>{if(e.key==='Enter')loginAdmin()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAdmin()});
 
 // =========================================
